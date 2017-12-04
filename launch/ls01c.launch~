@@ -1,0 +1,11 @@
+<launch>
+    <node name="ls01c" pkg="ls01c" type="ls01c">
+　　		<param name="scan_topic" value="scan"/>         #设置激光数据topic名称
+　　		<param name="laser_link" value="laser_link"/>     #激光坐标
+			<param name="frame_id"            type="string"  value="laser_link"/>
+　　		<param name="serial_port" value="/dev/ttyUSB0"/>  #雷达连接的串口
+    </node>
+        
+    
+  <node pkg="tf" type="static_transform_publisher" name="base_to_laser" args="0.0 0.0 0.18 0 0.0 0.0 base_link laser_link 100"/>
+</launch>

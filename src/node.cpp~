@@ -1,0 +1,33 @@
+
+#include<iostream>
+#include"uart_driver.h"
+using namespace std;
+
+int main()
+{
+	double angle[PACKLEN + 10];
+	double dis[PACKLEN + 10];
+	double speed;
+	io_driver driver;
+	int fd = driver.OpenSerial("/dev/ttyUSB0", B230400);
+
+	if(fd < 0)
+	{
+		cout<<"error."<<endl;
+		return 0;
+	}
+
+	cout<<"fd: "<<fd<<endl;
+
+	driver.StartScan();
+	for(int i = 0; i < 5; i++)
+	{
+		cout<<"i: "<<i<<endl;
+		driver.GetScanData(angle, dis, PACKLEN, &speed);
+		for(int j = 0; j < 5; j++)
+		{
+			cout<<dis[j]<<" ";
+		}
+		cout<<endl;
+	}
+}

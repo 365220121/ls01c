@@ -1,0 +1,16 @@
+<launch>
+
+  <!-- Define laser type-->
+  <arg name="laser_type" default="ls01c" />
+
+  <!--ls01c laser -->
+  <include file="$(find ls01c)/launch/$(arg laser_type)_laser.launch" />
+
+  <!-- Gmapping -->
+  <arg name="custom_gmapping_launch_file"  default="$(find ls01c)/launch/includes/hector_mapping/$(arg laser_type)_hector_mapping.launch.xml"/>
+  <include file="$(arg custom_gmapping_launch_file)"/>
+ 
+ <node pkg="rviz" type="rviz" name="rviz" />
+
+
+</launch>
